@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --muted: #64748b;
+  --primary: theme('colors.primary');
+}
+
+* {
+  @apply box-border;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-gradient-to-br from-slate-50 to-white text-slate-800 font-sans;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Dark mode base */
+.dark body {
+  background: linear-gradient(180deg,#0b1220,#071126);
+  color: #e6eef8;
+}
+
+/* Container */
+.app-container {
+  @apply container mx-auto px-4;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700 transition-shadow shadow-card;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-slate-100 text-slate-800 rounded-lg hover:bg-slate-200 transition;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition;
+  }
+
+  .btn-small {
+    @apply px-2 py-1 text-sm rounded;
+  }
+
+  .card {
+    @apply bg-white dark:bg-slate-800 rounded-2xl shadow-card p-6;
+  }
+
+  .card-elevated {
+    @apply bg-white dark:bg-slate-800 rounded-2xl shadow-elevated p-6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2 border border-slate-200 dark:border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white dark:bg-slate-900;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2;
+  }
+
+  .badge {
+    @apply px-3 py-1 rounded-full text-sm font-semibold inline-block;
+  }
+
+  .table-container {
+    @apply overflow-x-auto;
+  }
+
+  .table {
+    @apply w-full border-collapse text-sm;
+  }
+
+  .table th {
+    @apply px-4 py-3 text-left bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 font-semibold text-sm sticky top-0;
+  }
+
+  .table td {
+    @apply px-4 py-3 border-b border-slate-100 dark:border-slate-700;
+  }
+
+  .table tbody tr {
+    @apply hover:bg-slate-50 dark:hover:bg-slate-900 transition;
+  }
+
+  .modal-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-40;
+  }
+
+  .modal {
+    @apply bg-white dark:bg-slate-800 rounded-xl shadow-xl w-full max-w-lg;
+  }
+
+  /* Responsive stats grid */
+  .stats-grid {
+    @apply grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5;
+  }
+
+  /* Responsive table: stack rows on small screens */
+  @screen sm {
+    .table-mobile-hide { display: table-cell; }
+  }
+}
+
+/* Small tweaks for mobile lead cards when table isn't ideal */
+@media (max-width: 640px) {
+  .table thead { display: none; }
+  .table tbody tr { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 12px 0; }
+  .table td { display: block; padding: 0; border: none; }
+  .table td::before { content: attr(data-label); font-weight: 600; display: block; color: var(--muted); margin-bottom: 4px; }
+}
+
+/* Utility to visually separate sections */
+.section { @apply my-6; }
+
+/* Smooth transitions */
+* { transition: background-color .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease; }
